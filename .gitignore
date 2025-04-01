@@ -1,0 +1,13 @@
+videoplayback_1.mp4
+videoplayback.mp4
+venv/
+__pycache__/
+yolo11n.pt
+.idea/
+.env
+poc_filtering/.___pycache__
+poc_filtering/._filtering.py
+poc_filtering/._middle_finger_detection.py
+poc_katna/.___pycache__
+poc_katna/._inMemoryWriter.py
+poc_katna/._katna.py
