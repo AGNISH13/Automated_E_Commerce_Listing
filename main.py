@@ -1,12 +1,5 @@
-import argparse
-import os
-import subprocess
-import cv2
-import numpy as np
-import gzip
-
 from crud import video, transcripts, keyframes, keyframe_classes,final_class
-from utils.video_path import get_video_path
+from host import get_video_path
 from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 from poc_katna.katna import extract_keyframes    # Importing Katna processing
 from poc_filtering.filtering import filter_images  # Importing Filtering
@@ -18,11 +11,6 @@ from poc_gemini.description import generate_product_description  # Importing Gem
 def main():
 
     video_path = get_video_path()
-
-    if not os.path.exists(video_path):
-        print("Error: Video file not found.")
-        return
-    
     
     videoobj = video()
     video_id = videoobj.create(video_link=video_path)
@@ -91,18 +79,6 @@ def main():
     print(f"Product Description:\n{product_description}")
 
 
-    # print("Processing detected objects with Gemini AI...")
-    # confirmed_product, final_prompt = classify_and_confirm(class_ids, transcript)
-
-    # if confirmed_product:
-    #     print("Generating captions with BLIP...")
-    #     final_caption = generate_captions(confirmed_product)
-
-    #     print("Final Output:")
-    #     print(f"Confirmed Product: {confirmed_product}")
-    #     print(f"Final Caption: {final_caption}")
-    # else:
-    #     print("No result found. Prompt updated for further refinement.")
 
 if __name__ == "__main__":
     main()
