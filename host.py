@@ -52,15 +52,17 @@ if uploaded_file:
     with open(file_path, "wb") as write_file:
         write_file.write(uploaded_file.getvalue())
 
-# RUN POC STEPS ---------------------------------------------
+    # RUN POC STEPS ---------------------------------------------
 
-# create video id and send to database
-if 'video_id' not in st.session_state:
-    st.session_state['video_id'] = create_video_obj()
+    # create video id and send to database
+    if 'video_id' not in st.session_state:
+        st.session_state['video_id'] = create_video_obj()
 
-# run whisper and display transcript
-if 'transcript' not in st.session_state:
-    st.session_state['transcript'] = whisper()
-    st.write("""## Transcript""") 
-    st.write("Transcribing audio with Whisper...")
-    st.write(st.session_state['transcript'])
+    # run whisper and display transcript
+    if 'transcript' not in st.session_state:
+        st.session_state['transcript'] = whisper()
+    
+    if os.path.isfile(file_path):
+        st.write("""## Transcript""") 
+        st.write("Transcribing audio with Whisper...")
+        st.write(st.session_state['transcript'])
