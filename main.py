@@ -24,59 +24,59 @@ def main():
     print(transcipt_id)
     print(transcriptobj.get_transcripts(video_id=video_id)['response'])
 
-    print("Extracting keyframes using Katna...")
-    keyframe_bins = extract_keyframes(video_path)
-    keyframeobj = keyframes()
-    keyframes_id = keyframeobj.create(video_id=video_id,keyframes=keyframe_bins)
-    print(keyframes_id)
+    # print("Extracting keyframes using Katna...")
+    # keyframe_bins = extract_keyframes(video_path)
+    # keyframeobj = keyframes()
+    # keyframes_id = keyframeobj.create(video_id=video_id,keyframes=keyframe_bins)
+    # print(keyframes_id)
     
-    keyframe_r=[] # keyframeobj.get_all_keyframes(video_id=video_id)['response'] !FIX
-    print("Applying profanity filter...")
-    for keyframe_collection in keyframeobj.get_all_keyframes(video_id=video_id)['response']:
-        keyframe_r.append(keyframe_collection)
-    # print(keyframe_r)
-    filtered_keyframes = filter_images(keyframe_r)
-    keyframeobj.update_keyframes(video_id, filtered_keyframes)
-    # print(filtered_keyframes)# return filtered_keyframes -> list[base64] 
+    # keyframe_r=[] # keyframeobj.get_all_keyframes(video_id=video_id)['response'] !FIX
+    # print("Applying profanity filter...")
+    # for keyframe_collection in keyframeobj.get_all_keyframes(video_id=video_id)['response']:
+    #     keyframe_r.append(keyframe_collection)
+    # # print(keyframe_r)
+    # filtered_keyframes = filter_images(keyframe_r)
+    # keyframeobj.update_keyframes(video_id, filtered_keyframes)
+    # # print(filtered_keyframes)# return filtered_keyframes -> list[base64] 
     
-    # store in database
+    # # store in database
 
-    print("Running YOLO object detection...")
-    # detected_keyframes, class_ids = detect_objects(filtered_keyframes)
-    class_ids = detect_objects(video_id,filtered_keyframes)
-    classobj = keyframe_classes()
-    for classid in class_ids:
-        classobj.create(video_id=classid['video_id'],keyframe_id=classid['keyframe_id'],classes=classid['class'])
-    print(class_ids[-1])
+    # print("Running YOLO object detection...")
+    # # detected_keyframes, class_ids = detect_objects(filtered_keyframes)
+    # class_ids = detect_objects(video_id,filtered_keyframes)
+    # classobj = keyframe_classes()
+    # for classid in class_ids:
+    #     classobj.create(video_id=classid['video_id'],keyframe_id=classid['keyframe_id'],classes=classid['class'])
+    # print(class_ids[-1])
     
-    # Selecting top product using Gemini
-    print("Identifying the product with Gemini...")
-    classobj = keyframe_classes()
-    class_ids = classobj.get_classes(video_id=video_id)['response']
-    confirmed_ids = identify_product(transcript,class_ids)  # Example user input
-    finalclassobj = final_class()
-    finalclassobj.create(video_id,classes=confirmed_ids)
-    print(f"Confirmed Product IDs: {confirmed_ids}")
-    # confirmed_ids = ["bottle"]
+    # # Selecting top product using Gemini
+    # print("Identifying the product with Gemini...")
+    # classobj = keyframe_classes()
+    # class_ids = classobj.get_classes(video_id=video_id)['response']
+    # confirmed_ids = identify_product(transcript,class_ids)  # Example user input
+    # finalclassobj = final_class()
+    # finalclassobj.create(video_id,classes=confirmed_ids)
+    # print(f"Confirmed Product IDs: {confirmed_ids}")
+    # # confirmed_ids = ["bottle"]
 
-    # Selecting final keyframes using BLIP
-    print("Selecting final keyframes with BLIP...")
+    # # Selecting final keyframes using BLIP
+    # print("Selecting final keyframes with BLIP...")
     
-    blip_frame_obj = keyframes()
-    finalclassobj = final_class()
-    selected_keyframes = blip_frame_obj.get_all_keyframes(video_id)["response"]
-    confirmed_ids = finalclassobj.get_final_classes(video_id=video_id)['response']
-    matched_keyframes = blip_filter(selected_keyframes, confirmed_ids)
+    # blip_frame_obj = keyframes()
+    # finalclassobj = final_class()
+    # selected_keyframes = blip_frame_obj.get_all_keyframes(video_id)["response"]
+    # confirmed_ids = finalclassobj.get_final_classes(video_id=video_id)['response']
+    # matched_keyframes = blip_filter(selected_keyframes, confirmed_ids)
 
-    print(f"No. of keyframes selected by BLIP:\n{len(matched_keyframes)}")
+    # print(f"No. of keyframes selected by BLIP:\n{len(matched_keyframes)}")
     
-    # Generate the product description
-    print("Generating product description using Gemini...")
-    transcriptobj = transcripts()
-    transcript = transcriptobj.get_transcripts(video_id=video_id)['response']
-    product_description = generate_product_description(transcript)
+    # # Generate the product description
+    # print("Generating product description using Gemini...")
+    # transcriptobj = transcripts()
+    # transcript = transcriptobj.get_transcripts(video_id=video_id)['response']
+    # product_description = generate_product_description(transcript)
 
-    print(f"Product Description:\n{product_description}")
+    # print(f"Product Description:\n{product_description}")
 
 
 

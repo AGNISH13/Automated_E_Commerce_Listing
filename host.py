@@ -20,10 +20,9 @@ def create_video_obj():
     return None
 
 def whisper():
-    video_id = st.session_state['video_id']
-    transcript = transcribe_audio_from_bytes(video_id) #  return audio transcript -> string
+    transcript = transcribe_audio_from_bytes(st.session_state['file_path']) #  return audio transcript -> string
     transcriptobj = transcripts()
-    transcipt_id = transcriptobj.create(video_id=video_id,transcript=transcript)
+    transcipt_id = transcriptobj.create(video_id=st.session_state['video_id'],transcript=transcript)
     return transcript
 
 # VIDEO UPLOAD PAGE ---------------------------------------------
@@ -57,7 +56,7 @@ if uploaded_file:
 
 # create video id and send to database
 if 'video_id' not in st.session_state:
-    st.session_state['video_id'] = create_video_obj(file_path)
+    st.session_state['video_id'] = create_video_obj()
 
 # run whisper and display transcript
 if 'transcript' not in st.session_state:
