@@ -22,7 +22,8 @@ if uploaded_file:
     session_start_time = str(datetime.now())
     if 'session_start_time' not in st.session_state:
         st.session_state['session_start_time'] = session_start_time.replace(" ", "_").replace(":", "-").replace(".", "-")
-
+    
+    video_path_list = []
     for file in uploaded_file:
         # video_display = st.video(uploaded_file, format="video/mp4")
         name = file.name
@@ -31,13 +32,10 @@ if uploaded_file:
             os.remove(file_path)
         with open(file_path, "wb") as write_file:
             write_file.write(file.getvalue())
+        video_path_list.append(file_path)
 
     # RUN POC STEPS ---------------------------------------------
 
-    video_path_list = []
-    for file in os.path("stlit/uploads/"):
-        if file.endswith(st.session_state["session_start_time"]+".mp4"):
-            video_path_list.append(file)
     
     # create video id and send to database
     steps = Pipeline(video_path_list)
@@ -47,4 +45,5 @@ if uploaded_file:
         st.session_state['video_id'] = video_id_list # update session state with list of video ids
 
     transcript_list = steps.run_pipeline()
-
+    for transcript in transcript_list:
+        st.write(transcript)

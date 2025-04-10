@@ -11,17 +11,17 @@ class Pipeline:
         video_id = []
         for file in self.video_paths:
             videoobj = video()
-            video_id.append(videoobj.create(video_link=self.video_path))
+            video_id.append(videoobj.create(video_link=file))
         self.video_ids = video_id
         return video_id
 
     def run_pipeline(self): # update with stepper
-        transcripts = []
+        transcripts_list = []
         for i, path in enumerate(self.video_paths):
             # Process audio with Whisper
             print("Processing audio with Whisper...")
-            transcript = transcribe_audio_from_bytes(self.video_path)  # return audio transcript -> string
-            transcripts.append(transcript)
+            transcript = transcribe_audio_from_bytes(path)  # return audio transcript -> string
+            transcripts_list.append(transcript)
 
             # Create a transcript object and store the transcript
             transcriptobj = transcripts()
@@ -29,4 +29,4 @@ class Pipeline:
             print(transcipt_id)
             print(transcriptobj.get_transcripts(video_id=self.video_ids[i])['response'])
 
-            return transcripts
+            return transcripts_list
