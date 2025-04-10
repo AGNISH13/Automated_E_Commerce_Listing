@@ -2,7 +2,6 @@ import time
 from datetime import datetime
 import os
 import streamlit as st
-from utils.video_path import get_video_path
 
 from crud import video, transcripts, keyframes, keyframe_classes, final_class
 from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
