@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 import streamlit as st
 
-from pipeline import pipeline
+from pipeline import Pipeline
 from crud import video, transcripts, keyframes, keyframe_classes, final_class
 from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 
@@ -30,7 +30,7 @@ if uploaded_file:
         if os.path.isfile(file_path):
             os.remove(file_path)
         with open(file_path, "wb") as write_file:
-            write_file.write(uploaded_file.getvalue())
+            write_file.write(file.getvalue())
 
     # RUN POC STEPS ---------------------------------------------
 
@@ -40,11 +40,11 @@ if uploaded_file:
             video_path_list.append(file)
     
     # create video id and send to database
-    steps = pipeline(video_path_list)
+    steps = Pipeline(video_path_list)
     video_id_list = steps.create_video_obj()
 
     if 'video_id' not in st.session_state:
         st.session_state['video_id'] = video_id_list # update session state with list of video ids
 
-    transcript_list = steps(file_path).run_pipeline()
+    transcript_list = steps.run_pipeline()
 
