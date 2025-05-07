@@ -4,15 +4,12 @@ import os
 import streamlit as st
 
 from pipeline import Pipeline
-from crud import video, transcripts, keyframes, keyframe_classes, final_class
-from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 
-'''
-VIDEO UPLOAD PAGE ---------------------------------------------
-Choose whether to upload file or input file path
-Create a duplicate of the file in the uploads folder
-If the file already exists, remove it and create a new one
-'''
+
+# VIDEO UPLOAD PAGE ---------------------------------------------
+# Choose whether to upload file or input file path
+# Create a duplicate of the file in the uploads folder
+# If the file already exists, remove it and create a new one
 
 # st.set_page_config(page_title="Video Upload", page_icon="📹", layout="wide")
 # st.write("""## Uploading video""") 

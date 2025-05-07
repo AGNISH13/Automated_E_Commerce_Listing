@@ -1,3 +1,4 @@
+import streamlit as st
 from crud import video, transcripts, keyframes, keyframe_classes,final_class
 from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 
