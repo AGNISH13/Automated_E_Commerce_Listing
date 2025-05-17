@@ -4,11 +4,11 @@ class Display:
     def __init__(self, *args, **kwargs):
         pass
 
-    def display1(self):
-        st.write(st.session_state['flag1_content'])
+    def display_transcript(self):
+        st.write(st.session_state['pipeline'].transcript)
 
-    def display2(self):
-        st.write(st.session_state['flag2_content']) 
+    def display_description(self):
+        st.write(st.session_state['pipeline'].description)
 
     def close(self):
         pass
