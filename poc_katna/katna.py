@@ -47,7 +47,7 @@ def extract_keyframes(video_path):
 
     # Create an instance of the in-memory writer
     memory_writer = InMemoryWriter()
-
+    print("starting...")
     # Extract keyframes and process data with the in-memory writer
     vd.extract_video_keyframes(
         no_of_frames=no_of_frames_to_returned,

@@ -5,6 +5,7 @@ __pycache__/
 yolo11n.pt
 .idea/
 .env
+newenv/
 poc_filtering/.___pycache__
 poc_filtering/._filtering.py
 poc_filtering/._middle_finger_detection.py

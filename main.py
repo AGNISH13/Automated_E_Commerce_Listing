@@ -1,5 +1,4 @@
 from crud import video, transcripts, keyframes, keyframe_classes,final_class
-from host import get_video_path
 from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 from poc_katna.katna import extract_keyframes    # Importing Katna processing
 from poc_filtering.filtering import filter_images  # Importing Filtering
@@ -10,7 +9,7 @@ from poc_gemini.description import generate_product_description  # Importing Gem
 
 def main():
 
-    video_path = get_video_path()
+    video_path = "/home/agnish_gg/Automated_E_Commerce_Listing-master/videoplayback_1.mp4"
     
     videoobj = video()
     video_id = videoobj.create(video_link=video_path)

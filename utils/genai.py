@@ -13,4 +13,3 @@ llm = GoogleGenerativeAI(
     model="gemini-2.0-flash-lite", # gemini-1.5-pro
     google_api_key=os.getenv('google_api_key')
 )
-print(os.getenv('google_api_key'))

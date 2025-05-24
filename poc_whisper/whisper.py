@@ -46,6 +46,7 @@ def transcribe_audio_from_bytes(video_data, model_size="small"):
     # Transcribe the audio
     result = model.transcribe(samples)
     
+    print("transcription complete")
     # Return the transcribed text
     return result['text']
 
