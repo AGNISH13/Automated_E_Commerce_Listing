@@ -1,4 +1,7 @@
 .env
+newenv/
 venv/
 __pycache__/
 utils/__pycache__/
+yolo11n.pt
+readme.md
