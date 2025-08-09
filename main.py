@@ -1,35 +1,23 @@
-import argparse
-import os
-import subprocess
-import cv2
-import numpy as np
-import gzip
-
 from crud import video, transcripts, keyframes, keyframe_classes,final_class
-from utils.video_path import get_video_path
-from poc_whisper.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
+from utils.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 from poc_katna.katna import extract_keyframes    # Importing Katna processing
-from poc_filtering.filtering import filter_images  # Importing Filtering
-from poc_yolo.yolo2 import detect_objects  # Importing YOLO detection
+from utils.filtering import filter_images  # Importing Filtering
+from utils.yolo2 import detect_objects  # Importing YOLO detection
 from poc_gemini.top_ids import identify_product  # Importing Gemini classification
-from poc_blip.caption_matching_blip import blip_filter  # Importing BLIP captioning
+from utils.caption_matching_blip import blip_filter  # Importing BLIP captioning
 from poc_gemini.description import generate_product_description  # Importing Gemini classification
+
 
 def main():
 
-    video_path = get_video_path()
-
-    if not os.path.exists(video_path):
-        print("Error: Video file not found.")
-        return
-    
+    video_path = "/home/agnish_gg/Automated_E_Commerce_Listing-master/videoplayback_1.mp4"
     
     videoobj = video()
     video_id = videoobj.create(video_link=video_path)
     print(video_id)
     
     print("Processing audio with Whisper...")
-    transcript = transcribe_audio_from_bytes(video_path) #  return audio transcript -> string
+    transcript = transcribe_audio_from_bytes(video_path)
     
     transcriptobj = transcripts()
     transcipt_id = transcriptobj.create(video_id=video_id,transcript=transcript)
@@ -42,19 +30,15 @@ def main():
     keyframes_id = keyframeobj.create(video_id=video_id,keyframes=keyframe_bins)
     print(keyframes_id)
     
-    keyframe_r=[] # keyframeobj.get_all_keyframes(video_id=video_id)['response'] !FIX
     print("Applying profanity filter...")
+    keyframe_r=[]
     for keyframe_collection in keyframeobj.get_all_keyframes(video_id=video_id)['response']:
         keyframe_r.append(keyframe_collection)
-    # print(keyframe_r)
     filtered_keyframes = filter_images(keyframe_r)
     keyframeobj.update_keyframes(video_id, filtered_keyframes)
-    # print(filtered_keyframes)# return filtered_keyframes -> list[base64] 
     
     # store in database
-
     print("Running YOLO object detection...")
-    # detected_keyframes, class_ids = detect_objects(filtered_keyframes)
     class_ids = detect_objects(video_id,filtered_keyframes)
     classobj = keyframe_classes()
     for classid in class_ids:
@@ -65,11 +49,10 @@ def main():
     print("Identifying the product with Gemini...")
     classobj = keyframe_classes()
     class_ids = classobj.get_classes(video_id=video_id)['response']
-    confirmed_ids = identify_product(transcript,class_ids)  # Example user input
+    confirmed_ids = identify_product(transcript,class_ids)
     finalclassobj = final_class()
     finalclassobj.create(video_id,classes=confirmed_ids)
     print(f"Confirmed Product IDs: {confirmed_ids}")
-    # confirmed_ids = ["bottle"]
 
     # Selecting final keyframes using BLIP
     print("Selecting final keyframes with BLIP...")
@@ -91,18 +74,6 @@ def main():
     print(f"Product Description:\n{product_description}")
 
 
-    # print("Processing detected objects with Gemini AI...")
-    # confirmed_product, final_prompt = classify_and_confirm(class_ids, transcript)
-
-    # if confirmed_product:
-    #     print("Generating captions with BLIP...")
-    #     final_caption = generate_captions(confirmed_product)
-
-    #     print("Final Output:")
-    #     print(f"Confirmed Product: {confirmed_product}")
-    #     print(f"Final Caption: {final_caption}")
-    # else:
-    #     print("No result found. Prompt updated for further refinement.")
 
 if __name__ == "__main__":
     main()

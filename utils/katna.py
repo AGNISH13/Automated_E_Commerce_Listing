@@ -59,6 +59,4 @@ def extract_keyframes(video_path):
     print(f"Extracted {len(memory_writer.keyframes)} keyframes.")
 
     keyframes = (memory_writer.keyframes)
-    # print(memory_writer.keyframes)
     return keyframes
-# return video_id, dict{keyframes}

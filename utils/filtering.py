@@ -28,57 +28,6 @@ def is_middle_finger_up(hand_landmarks):
 
     return middle_finger_tip.y < middle_finger_pip.y < middle_finger_mcp.y
 
-
-# Function to process images
-def filter_images1(keyframe_collection):
-    # base64_images =
-    binary_images = [base64.b64decode(img) for img in base64_images]
-    filtered_images = []
-
-    for i,binary_image in enumerate(binary_images):
-        try:
-
-            # Detect vulgar content using NudeNet
-            detections = detector.detect(binary_image)
-            flag=0
-            
-            for detection in detections:
-                if detection['class'] in explicit:
-                    print(f"Vulgar content detected")
-                    flag=1
-                    break
-            if flag==1:
-                continue
-            # Load and process the image for middle finger detection
-            np_arr = np.frombuffer(binary_image, dtype=np.uint8)
-            image_rgb = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-            results = hands.process(image_rgb)
-
-            middle_finger_detected = False
-            if results.multi_hand_landmarks:
-                for hand_landmarks in results.multi_hand_landmarks:
-                    drawing_utils.draw_landmarks(image_rgb, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-                    if is_middle_finger_up(hand_landmarks):
-                        middle_finger_detected = True
-                        flag=1
-                        break
-
-            if middle_finger_detected:
-                print(f"Middle finger detected")
-                continue
-
-            if flag==1:
-                continue
-
-            # If no vulgar content or middle finger detected, add to filtered list
-            filtered_images.append(base64_images[i])
-
-        except Exception as e:
-            print(f"Error processing : {e}") # {image_path}
-
-    return filtered_images      # -> list[base64]
-
-
 def filter_images(keyframe_collection):
     # base64_images = keyframe_collection['keyframe']
     # binary_images = [base64.b64decode(img) for img in base64_images]
@@ -129,11 +78,3 @@ def filter_images(keyframe_collection):
             print(f"Error processing : {e}") # {image_path}
 
     return filtered_images
-
-
-# Example usage
-# image_directory = "/home/agnish_gg/amazon_listing_sam/poc_filtering/Images"
-# image_paths = [os.path.join(image_directory, f) for f in os.listdir(image_directory) if f.lower().endswith(('png', 'jpg', 'jpeg'))]
-# filtered_images = filter_images(image_paths)
-
-# print("Filtered images:", filtered_images)

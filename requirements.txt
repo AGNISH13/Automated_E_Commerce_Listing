@@ -1,9 +1,0 @@
-opencv-headless
-openai-whisper
-pydub
-Pillow
-katna
-mediapipe
-nudenet
-ultralytics
-pymongo

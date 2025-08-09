@@ -10,9 +10,6 @@ from transformers import BlipProcessor, BlipForConditionalGeneration
 import cv2
 import base64
 
-# Step 1: Inputs from Redis
-# required_objects = []  # User input
-# binaries = []
 
 def blip_filter(filtered_keyframes, required_objects): # [{id: bnr},..], [str,..] -> [{id: bnr},..]
     processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
@@ -34,6 +31,7 @@ def blip_filter(filtered_keyframes, required_objects): # [{id: bnr},..], [str,..
             matched_img.append(base64_image)
 
     return matched_img
+
 
 # Step 3: Process YOLO keyframes and filter them
 def filter_keyframes(images, required_objects): # array[binaries], array[string] -> dict{binary: caption}, dict{binary: caption}
@@ -60,8 +58,3 @@ def filter_keyframes(images, required_objects): # array[binaries], array[string]
     # matched_img = dictionary of matched keyframe: caption
 
     return d, matched_img
-
-        
-# dic, matches = filter_keyframes(binaries, required_objects)
-
-
