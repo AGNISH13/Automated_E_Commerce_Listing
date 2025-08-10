@@ -2,7 +2,7 @@ from crud import video, transcripts, keyframes, keyframe_classes,final_class
 from utils.whisper import transcribe_audio_from_bytes  # Importing Whisper processing
 from utils.katna import extract_keyframes    # Importing Katna processing
 from utils.filtering import filter_images  # Importing Filtering
-from utils.yolo2 import detect_objects  # Importing YOLO detection
+from utils.yolo import detect_objects  # Importing YOLO detection
 from utils.top_ids import identify_product  # Importing Gemini classification
 from utils.caption_matching_blip import blip_filter  # Importing BLIP captioning
 from utils.description import generate_product_description  # Importing Gemini classification
@@ -10,7 +10,7 @@ from utils.description import generate_product_description  # Importing Gemini c
 
 def main():
 
-    video_path = "/home/agnish_gg/Automated_E_Commerce_Listing-master/videoplayback_1.mp4"
+    video_path = None  # Your file path
     
     videoobj = video()
     video_id = videoobj.create(video_link=video_path)
