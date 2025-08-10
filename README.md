@@ -1,4 +1,4 @@
-# Automated_E_Commerce_Listing
+# Automated-E-Commerce-Product-Listing
 
 ## Problem Description
 In today's fast-paced e-commerce landscape, sellers face significant challenges in creating and maintaining compelling product listings. The traditional process is labor-intensive and slow, requiring manual effort to extract product details from marketing content, write descriptions, and select appropriate images. This manual workflow is a bottleneck for sellers, especially those who want to leverage popular social media trends and influencer content.
@@ -20,9 +20,17 @@ The result is a high-quality product listing, ready for e-commerce platforms.
 
 
 ## Tech Stack
-In this project, we have used the histopathological image samples of human breast tissue, which have been classified into two categories, namely:  
-- `Benign tissue`  
-- `Malignant tissue` 
+This project has used the following tech stack
+- `Python`
+OpenCV 	(open source)
+Hugging Face	(open source)
+AWS EKS 	(open source)
+Traefik proxy 	(open source)
+Whisper 	(open source)
+YOLO v8	(open source)
+BLIP 		(open source)
+CLIP 		(open source)
+Gemini 		(proprietary)
 
 ## Flowchart
 -     GoogleNet using KNN classifier
@@ -31,8 +39,8 @@ In this project, we have used the histopathological image samples of human breas
 
 
 ## Dependencies
-Since the entire project is based on `Python` programming language, it is necessary to have Python installed in the system. It is recommended to use Python with version `>=3.6`.
-The Python packages which are in use in this project are  `matplotlib`, `numpy`, `pandas`, `scikit-learn`, `torch` and `torchvision`. All these dependencies can be installed just by the following command line argument
+Since the entire project is based on `Python` programming language, it is necessary to have Python installed in the system. It is recommended to use Python with version `>=3.7`.
+There are a number of Python packages which are in use in this project. All these dependencies can be installed just by the following command line argument
 - pip install `requirements.txt`
 
 ## Code implementation
@@ -80,13 +88,4 @@ The Python packages which are in use in this project are  `matplotlib`, `numpy`,
         
 -  ### Run the following for training and validation :
   
-      `python main.py -data data -classes n -ext resnet -classif KNN`
-      
--  ### Specific tokens :
-
-          GoogLeNet: 'googlenet'
-          ResNet-18: 'resnet'
-          VGG-19: 'vgg16'
-          SVM Classifier: 'SVM'
-          KNN Classifier: 'KNN'
-          MLP Classifier: 'MLP'
+      `python main.py -data data`
