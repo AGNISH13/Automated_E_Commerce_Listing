@@ -19,8 +19,8 @@ Our tool automates the creation of E-Commerce product listings from social media
 The result is a high-quality product listing, ready for e-commerce platforms.
 
 ## Flowchart
--     GoogleNet using KNN classifier
-     ![image](<img width="1772" height="789" alt="flowchart" src="https://github.com/user-attachments/assets/30115475-a8e5-4098-ad9c-b5956ccb4106" />)
+
+![image](<img width="1772" height="789" alt="flowchart" src="https://github.com/user-attachments/assets/30115475-a8e5-4098-ad9c-b5956ccb4106" />)
 
 ## Tools Used
 This project has used the following tools:
