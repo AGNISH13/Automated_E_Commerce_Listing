@@ -1,0 +1,5 @@
+__pycache__/
+newenv/
+venv/
+.env
+yolo11n.pt
