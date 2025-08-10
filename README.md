@@ -20,7 +20,8 @@ The result is a high-quality product listing, ready for e-commerce platforms.
 
 ## Flowchart
 
-![image](<img width="1772" height="789" alt="flowchart" src="https://github.com/user-attachments/assets/30115475-a8e5-4098-ad9c-b5956ccb4106" />)
+<img width="1772" height="789" alt="flowchart" src="https://github.com/user-attachments/assets/adaef6d9-de41-452e-b1c2-37535fc242ba" />
+
 
 ## Tools Used
 This project has used the following tools:
