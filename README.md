@@ -40,26 +40,31 @@ There are a number of Python packages which are in use in this project. All thes
 - `pip install requirements.txt`
 
 ## Code Implementation
-- ### Data paths :
-      Current directory -------> data
-                                  |
+- ### Code paths :
+      main.py --------------------------------------------------------------------------------> top_ids.py
+                                  |                                                                 |  
+                                  |                                                                 V 
+                                  |                                                             load_llm.py
                                   |
                                   |               
-                                  --------------------->  train
-                                  |                         |
-                                  |             -------------------------
-                                  |             |        |              |
-                                  |             V        V              V
-                                  |           class_1  class_2 ...... class_n
+                                  ------------------------------------------------------------> crud.py
+                                  |                                                                |
+                                  |                                                     -------------------------
+                                  |                                                     |                       |
+                                  |                                                     V                       V
+                                  |                                                connection.py           constants.py
                                   |
                                   |
                                   |              
-                                  --------------------->   val
-                                                            |
-                                                -------------------------
-                                                |        |              |
-                                                V        V              V
-                                              class_1  class_2 ...... class_n
+                                  ------------------------------------------------------------> utils
+                                                                                                  |
+                                               -------------------------------------------------------------------------------------------------------
+                                               |                  |              |             |          |                   |                      |
+                                               V                  V              V             V          V                   V                      V
+                                     mp4_mp3_conversion.py    whisper.py    filtering.py    katna.py    yolo.py    caption_matching_blip.py    description.py
+                                                                                                          |                                          |
+                                                                                                          V                                          V
+                                                                                                  image_conversion.py                            load_llm.py
                                               
                                
         
