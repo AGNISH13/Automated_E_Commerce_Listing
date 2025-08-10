@@ -20,7 +20,7 @@ The result is a high-quality product listing, ready for e-commerce platforms.
 
 ## Flowchart
 -     GoogleNet using KNN classifier
-     ![image](https://github.com/user-attachments/assets/587a0a0a-d1ab-4a1a-9ff2-d4f58a29b23f)
+     ![image](<img width="1772" height="789" alt="flowchart" src="https://github.com/user-attachments/assets/30115475-a8e5-4098-ad9c-b5956ccb4106" />)
 
 ## Tools Used
 This project has used the following tools:
